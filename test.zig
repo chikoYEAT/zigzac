@@ -53,3 +53,19 @@ test "simple union" {
     var result = Result{ .int = 1234 };
     result = Result{.float = 12.34};
 }
+
+
+
+test "nested continue" {
+    var count: usize = 0;
+    outer: for ([_]i32{1,2,3,4,5,6,7,8,9}) |_| {                         // sliced
+        for ([_]i32{1,2,3,4,5}) |_| {
+            count += 1;   
+            continue :outer;                        // recurssion
+        }
+    }
+    std.debug.print("{d}\n",.{count});
+    try expect(count == 9);
+}
+
+
