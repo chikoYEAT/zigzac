@@ -24,14 +24,6 @@ test "function recursion" {
     
 }
 
-test "out of bounds, no safety" {
-    @setRuntimeSafety(false);
-    const a = [3]u8{ 1, 2, 3 };
-    const index: u8 = 5;
-    const b = a[index];
-    _ = b;
-}
-
 fn increment(num: *u8) void {
     num.* += 1;
 }
@@ -77,4 +69,13 @@ test "hmm" {
     Mode.count += 1;
     try expect(Mode.count == 1);
     std.debug.print("{d}\n",.{Mode.count});
+}
+test "optional-if" {
+    const maybe_num: ?usize = 10;
+    if (maybe_num) |n| {
+        try expect(@TypeOf(n) == usize);
+        try expect(n == 10);
+    } else {
+        unreachable;
+    }
 }
