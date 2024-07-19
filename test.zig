@@ -55,7 +55,6 @@ test "simple union" {
 }
 
 
-
 test "nested continue" {
     var count: usize = 0;
     outer: for ([_]i32{1,2,3,4,5,6,7,8,9}) |_| {                         // sliced
